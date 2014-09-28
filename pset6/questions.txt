@@ -1,0 +1,22 @@
+0.  The maximum length of a word
+1.  returns resource usage measures for who (parent & child threads).
+2.  17
+3.  Because the resource usages are returned in the structure pointed to by usage.
+4.  The loop reads in each character from the file, updating index each time an alphabetical char is found, or an apostrophe
+    beyond index 0.  If the word is longer than MAX, or a number, it consumes it and throws it away. As soon as it reads in a 
+    space, a word has been found, the null terminator is appended, and index is reset to 0. Word count is updated, rusage is updated,
+    and the word is checked against the dictionary, if it is misspelled, it is printed.
+5.  fscanf would run into problems, because we don't know ahead of time how many characters need to be read.
+6.  Because the dictionary and word(s) to be checked's location is static--the dictionary pointer won't change after
+    being set, and the word(s) to be checked pointer won't change (the word will though).
+7.  I used a hash table. I originally had planned on using a trie, but quickly found out I was not nearly comfortable enough
+    with pointers/structs, so set about doing a lot of linked list exercises, and then finally a hash table for the pset.
+    My node included a char array for the word, and a pointer to the next node.  Originally, it was a char* instead of array,
+    but that was problematic, and Glenn helped me resolve that issue with the char array.
+8.  Very slow...roughly 128 seconds--I was accidentally putting the entire dictionary into one linked list.
+9.  Cleaned up the code, and added the nodes to the tail instead of head--in hindsight that didn't make it any more
+    efficient though.
+10. The hash table is a bottleneck.  I would've liked to double, or even triple hash (first three letters in a word as a key)
+    but spent so much time banging my head against the wall on this pset, I am just happy to have it finished with valgrind
+    happy.  I'll likely revisit this pset at a later time and implement a trie, or maybe an even more advanced data structure
+    that would improve its real world performance.
